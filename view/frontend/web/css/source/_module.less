@@ -1,12 +1,27 @@
-@label_floating-padding-x: 1rem;
-@label_floating-padding-y: 1rem;
+// phpcs:ignoreFile
+@label_floating-padding-x: 1.5rem;
+@label_floating-padding-y: 1.3rem;
+@moip-fields-input__padding-top: @label_floating-padding-y;
+@moip-fields-input__padding-bottom: @label_floating-padding-y;
+@moip-fields-input__padding-right: @indent__xs;
+@moip-fields-input__padding-left: @indent__s;
+@moip-fields-label__font-size: 1rem;
+@moip-fields-tooltip__padding: @indent__xs @indent__s;
+@moip-fields-tooltip-icon__font-size: 14px;
+@moip-checkout__box-shadow: 0 3px 5px rgba(57, 22, 58, 0.05);
+@moip-checkout__border-radius: 3px;
+@moip-checkout__margin-adjust: 21px;
+
 & when (@media-common = true) {
+  .payment_form_cc_moip_magento2_cc_vault,
   #payment_form_cc_moip_magento2_cc,
-  #payment_form_cc_moip_magento2_cc_vault,
   #payment_form_cc_moip_magento2_boleto {
     border: 1px solid;
     border-color: @color-gray-light2;
-
+    .lib-css(background-color, @color-white);
+    .lib-css(border-radius, @moip-checkout__border-radius);
+    .lib-css(padding-bottom, @indent__s);
+    
     .legend {
       align-items: center;
       display: flex;
@@ -24,6 +39,7 @@
 
       &-icon {
         margin-right: 0;
+        text-align: right;
       }
     }
 
@@ -34,19 +50,28 @@
       padding: @indent__base;
     }
   }
-
-  #payment_form_moip_magento2_cc,
+  #co-payment-form {
+    margin-bottom: @indent__base;
+  }
   #payment_form_moip_magento2_cc_vault,
+  #payment_form_moip_magento2_cc,
   #payment_form_moip_magento2_boleto {
     .payment-method-label {
-      display: inline-flex;
-      align-items: center;
+      display: table;
+      vertical-align: middle;
 
       .payment-method-label-icon {
-        width: 25px;
-        text-align: center;
-        line-height: 1;
-        padding-right: 10px;
+        display: table-cell;
+        vertical-align: middle;
+        line-height: 0;
+        img {
+          width: 26px;
+        }
+      }
+      .payment-method-label-title {
+        padding-left: 10px;
+        display: table-cell;
+        vertical-align: middle;
       }
     }
 
@@ -66,7 +91,7 @@
           list-style: none;
           margin: 0 @indent__xs 0 0;
           vertical-align: top;
-
+          text-align: right;
           img {
             -webkit-filter: grayscale(0%);
             width: 20px;
@@ -76,26 +101,24 @@
     }
 
     .field-to-pay {
-      margin: 0 @indent__base;
+      margin: 0 @indent__s;
 
       &._hidden {
         &:extend(.abs-visually-hidden all);
 
       }
     }
-
     .fieldset {
       .field {
-        display: inline-block;
-        width: 100%;
         &.choice {
           margin-bottom: @indent__base;
         }
-        &.wirecard-input-group {
+        &.moip-input-group {
+          display: inline-block;
+          width: 100%;
           position: relative;
           margin-bottom: @indent__base;
           vertical-align: top;
-          display: inline-block;
           box-sizing: border-box;
 
           .control {
@@ -145,8 +168,13 @@
             }
 
             &._with-tooltip {
+              position: relative;
               input {
                 width: 100%;
+              }
+              .label {
+                width: 60%;
+                padding-right: 20px;
               }
 
               .field-tooltip {
@@ -193,6 +221,8 @@
               }
 
               img {
+                width: 32px;
+                margin-right: 10px;
                 -webkit-filter: unset; // For Webkit browsers
                 -webkit-transition: all 0.6s ease; // Fade to color for Chrome and Safari
               }
@@ -204,6 +234,9 @@
           width: 30%;
           float: right;
           padding-left: 10px;
+          input {
+            padding-right: 20px;
+          }
         }
 
         &.date {
@@ -212,14 +245,18 @@
           .group-2 {
             display: inline-flex;
             width: 100%;
-
+            .month {
+              padding-left: 0;
+            }
             .year {
               padding-left: 10px;
+              padding-right: 0;
             }
           }
         }
       }
     }
+    
 
   }
   #payment_form_moip_magento2_cc_vault {
@@ -241,7 +278,7 @@
     }
 
     .field {
-      &.wirecard-input-group {
+      &.moip-input-group {
         margin: 0 auto;
         max-width: 500px;
       }
@@ -260,7 +297,7 @@
       .credit-card-types {
         .item {
           img {
-            width: 40px;
+            width: 32px;
           }
         }
       }

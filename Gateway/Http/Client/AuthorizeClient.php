@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -24,10 +24,13 @@ use Moip\Magento2\Gateway\Config\Config;
  */
 class AuthorizeClient implements ClientInterface
 {
-    const MOIP_ORDER_ID = 'moip_order_id';
+    /**
+     * @var string
+     */
+    public const MOIP_ORDER_ID = 'moip_order_id';
 
     /**
-     * @var LoggerInterface
+     * @var Logger
      */
     private $logger;
 

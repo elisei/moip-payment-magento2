@@ -1,5 +1,5 @@
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
@@ -25,7 +25,6 @@ define(
             var serviceUrl,
                 payload,
                 quoteId = quote.getQuoteId();
-
             if (!customer.isLoggedIn()) {
                 serviceUrl = urlBuilder.createUrl('/guest-carts/:cartId/set-installment-for-moip-interest', {
                     cartId: quoteId

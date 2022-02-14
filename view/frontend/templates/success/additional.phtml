@@ -1,12 +1,12 @@
 <!--
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
  */
 -->
 <?php if ($block->getMethodCode() == 'moip_magento2_boleto'): ?>
-    <p>
+    <div class="moip-info-boleto">
         <?= /* @noEscape */ __('The barcode of your ticket bank is:') ?> 
         <div class="field osc-input-group">
             <div class="control _with-tooltip">
@@ -22,14 +22,14 @@
             </div>
         </div>
         
-    </p>
-    <p>
+    </div>
+    <div class="moip-info-boleto">
         <a href="<?= /* @noEscape */ $block->getInfo('boleto_print_href'); ?>"
             target="_blank"
             class="action primary continue">
             <?= /* @noEscape */ __('Print your ticket bank') ?> 
         </a>
-    </p>
+    </div>
     <script type="text/javascript">
         document.getElementById("copyButton").addEventListener("click", function() {
             copyToClipboard(document.getElementById("copyTarget"));
@@ -82,6 +82,6 @@
                 target.textContent = "";
             }
             return succeed;
-    }
+        }
     </script>
 <?php endif; ?>

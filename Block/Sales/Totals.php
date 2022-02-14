@@ -1,6 +1,6 @@
 <?php
 /**
- * Copyright © Wirecard Brasil. All rights reserved.
+ * Copyright © Moip by PagSeguro. All rights reserved.
  *
  * @author    Bruno Elisei <brunoelisei@o2ti.com>
  * See COPYING.txt for license details.
@@ -30,6 +30,8 @@ class Totals extends Template
     protected $_source;
 
     /**
+     * Type display in Full Sumary.
+     *
      * @return bool
      */
     public function displayFullSummary()
@@ -48,7 +50,9 @@ class Totals extends Template
     }
 
     /**
-     * @return store
+     * Get Store.
+     *
+     * @return string
      */
     public function getStore()
     {
@@ -56,7 +60,9 @@ class Totals extends Template
     }
 
     /**
-     * @return Order
+     * Get Order.
+     *
+     * @return order
      */
     public function getOrder()
     {
@@ -79,31 +85,32 @@ class Totals extends Template
         }
 
         $valueInterest = $this->_source->getMoipInterestAmount();
-        $label = $this->getLabelByInterest($valueInterest);
-        $moipInterest = new DataObject(
-            [
-                'code'   => 'moip_interest',
-                'strong' => false,
-                'value'  => $valueInterest,
-                'label'  => $label,
-            ]
-        );
+        if ($valueInterest) {
+            $label = $this->getLabelByInterest($valueInterest);
+            $moipInterest = new DataObject(
+                [
+                    'code'   => 'moip_interest',
+                    'strong' => false,
+                    'value'  => $valueInterest,
+                    'label'  => $label,
+                ]
+            );
 
-        if ((int) $valueInterest !== 0.0000) {
-            $parent->addTotal($moipInterest, 'moip_interest');
+            if ((int) $valueInterest !== 0.0000) {
+                $parent->addTotal($moipInterest, 'moip_interest');
+            }
         }
-
         return $this;
     }
 
     /**
      * Get Subtotal label by Interest.
      *
-     * @param $interest | float
+     * @param string $interest
      *
      * @return Phrase
      */
-    public function getLabelByInterest($interest)
+    public function getLabelByInterest(string $interest)
     {
         if ($interest >= 0) {
             return __('Installment Interest');
